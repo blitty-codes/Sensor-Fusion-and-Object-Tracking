@@ -48,23 +48,25 @@ import misc.params as params
 
 ##################
 ## Set parameters and perform initializations
-exercise = 'ID_S1_EX2'
+exercise = 'ID_S2_EX1-2-3'
 
 data_filename = ''
 show_only_frames = [0, 0]
-model = ''
+model = 'darknet'
 exec_detection, exec_data, exec_tracking, exec_visualization = [], [], [], []
 
 if exercise == 'ID_S1_EX1':
     data_filename = 'training_segment-1005081002024129653_5313_150_5333_150_with_camera_labels.tfrecord'  # Sequence 1
     show_only_frames = [0, 1]  # show only frames in interval for debugging
-    model = "darknet"
     exec_detection, exec_data, exec_tracking, exec_visualization = [], [], [], ['show_range_image']
 if exercise == 'ID_S1_EX2':
     data_filename = 'training_segment-10963653239323173269_1924_000_1944_000_with_camera_labels.tfrecord'  # Sequence 3
     show_only_frames = [0, 200]  # show only frames in interval for debugging
-    model = "darknet"
     exec_detection, exec_data, exec_tracking, exec_visualization = [], [], [], ['show_pcl']
+if exercise == 'ID_S2_EX1-2-3':
+    data_filename = 'training_segment-1005081002024129653_5313_150_5333_150_with_camera_labels.tfrecord'  # Sequence 1
+    show_only_frames = [0, 1]
+    exec_detection, exec_data, exec_tracking, exec_visualization = ['bev_from_pcl'], ['pcl_from_rangeimage'], [], []
 
 ## Select Waymo Open Dataset file and frame numbers
 # data_filename = 'training_segment-1005081002024129653_5313_150_5333_150_with_camera_labels.tfrecord'  # Sequence 1
