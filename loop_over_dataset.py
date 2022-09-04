@@ -48,7 +48,7 @@ import misc.params as params
 
 ##################
 ## Set parameters and perform initializations
-exercise = 'ID_S2_EX1-2-3'
+exercise = 'ID_S3_EX1-2'
 
 data_filename = ''
 show_only_frames = [0, 0]
@@ -67,6 +67,12 @@ if exercise == 'ID_S2_EX1-2-3':
     data_filename = 'training_segment-1005081002024129653_5313_150_5333_150_with_camera_labels.tfrecord'  # Sequence 1
     show_only_frames = [0, 1]
     exec_detection, exec_data, exec_tracking, exec_visualization = ['bev_from_pcl'], ['pcl_from_rangeimage'], [], []
+if exercise == 'ID_S3_EX1-2':
+    model = 'fpn_resnet'
+    data_filename = 'training_segment-1005081002024129653_5313_150_5333_150_with_camera_labels.tfrecord'  # Sequence 1
+    show_only_frames = [50, 51]
+    exec_detection, exec_data, exec_tracking, exec_visualization = ['bev_from_pcl', 'detect_objects'], ['pcl_from_rangeimage', 'load_image'], [], ['show_objects_in_bev_labels_in_camera']
+
 
 ## Select Waymo Open Dataset file and frame numbers
 # data_filename = 'training_segment-1005081002024129653_5313_150_5333_150_with_camera_labels.tfrecord'  # Sequence 1

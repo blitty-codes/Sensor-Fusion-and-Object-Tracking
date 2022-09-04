@@ -227,5 +227,3 @@ def bev_from_pcl(lidar_pcl, configs, vis=True):
     bev_maps = torch.from_numpy(bev_maps)  # create tensor from birds-eye view
     input_bev_maps = bev_maps.to(configs.device, non_blocking=True).float()
     return input_bev_maps
-
-
