@@ -48,7 +48,7 @@ import misc.params as params
 
 ##################
 ## Set parameters and perform initializations
-exercise = 'ID_S4_EX1-2'
+exercise = 'ID_S4_EX3'
 
 data_filename = ''
 show_only_frames = [0, 0]
@@ -75,6 +75,13 @@ if exercise == 'ID_S3_EX1-2':
 if exercise == 'ID_S4_EX1-2':
     data_filename = 'training_segment-1005081002024129653_5313_150_5333_150_with_camera_labels.tfrecord'  # Sequence 1
     show_only_frames = [50, 51]
+    exec_detection, exec_data, exec_tracking, exec_visualization = ['bev_from_pcl', 'detect_objects', 'validate_object_labels', 'measure_detection_performance'],\
+                                                                   ['pcl_from_rangeimage'],\
+                                                                   [],\
+                                                                   ['show_detection_performance']
+if exercise == 'ID_S4_EX3':
+    data_filename = 'training_segment-1005081002024129653_5313_150_5333_150_with_camera_labels.tfrecord'  # Sequence 1
+    show_only_frames = [50, 51] #150]
     exec_detection, exec_data, exec_tracking, exec_visualization = ['bev_from_pcl', 'detect_objects', 'validate_object_labels', 'measure_detection_performance'],\
                                                                    ['pcl_from_rangeimage'],\
                                                                    [],\
@@ -312,7 +319,7 @@ while True:
 
 ## Evaluate object detection performance
 if 'show_detection_performance' in exec_list:
-    eval.compute_performance_stats(det_performance_all, configs_det)
+    eval.compute_performance_stats(det_performance_all)
 
 ## Plot RMSE for all tracks
 if 'show_tracks' in exec_list:

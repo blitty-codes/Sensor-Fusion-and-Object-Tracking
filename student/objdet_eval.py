@@ -132,14 +132,18 @@ def compute_performance_stats(det_performance_all):
     print('student task ID_S4_EX3')
 
     ## step 1 : extract the total number of positives, true positives, false negatives and false positives
-    
+    all_positives = sum(np.array(pos_negs)[:, 0])
+    true_positives = sum(np.array(pos_negs)[:, 1])
+    false_negatives = sum(np.array(pos_negs)[:, 2])
+    false_positives = sum(np.array(pos_negs)[:, 3])
+
     ## step 2 : compute precision
-    precision = 0.0
+    precision = true_positives / float(true_positives + false_positives)
 
-    ## step 3 : compute recall 
-    recall = 0.0
+    ## step 3 : compute recall
+    recall = true_positives / float(false_positives + false_negatives)
 
-    #######    
+    #######
     ####### ID_S4_EX3 END #######     
     print('precision = ' + str(precision) + ", recall = " + str(recall))   
 
