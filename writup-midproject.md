@@ -40,22 +40,22 @@ Also, for simplicity to make the writeup, we only used frames 0 and 1, instead o
 
 Before going into **sequence 3** we can see from the images below (from **sequence 1**) that the with open3d we can see better the cars on the road.
 
-![Bird of view pointcloud sequence 1](img/midterm project/ID_S1_EX2-seq1.png)
-![Back image pointcloud sequence 1](img/midterm project/ID_S1_EX2-zoom-seq1-back.png)
-![Front image pointcloud sequence 1](img/midterm project/ID_S1_EX2-zoom-seq1-front.png)
+![Bird of view pointcloud sequence 1](./img/midterm project/ID_S1_EX2-seq1.png)
+![Back image pointcloud sequence 1](./img/midterm project/ID_S1_EX2-zoom-seq1-back.png)
+![Front image pointcloud sequence 1](./img/midterm project/ID_S1_EX2-zoom-seq1-front.png)
 
 We can see that there is one car with another intensity (second image, far-most car).
 
 In order to see more we are going to use **sequence 3**.
 
 Visualizing **range** and **intensity**:
-![](img/midterm project/ID_S1_EX1-seq3.png)
-![](img/midterm project/ID_S1_EX1-seq3-crop.png)
+![View](./img/midterm project/ID_S1_EX1-seq3.png)
+![45 deg front](./img/midterm project/ID_S1_EX1-seq3-crop.png)
 
 Point-cloud images from different angles:
-![](img/midterm project/ID_S1_EX2-seq3.png)
-![](img/midterm project/ID_S1_EX2-zoom-seq3-back.png)
-![](img/midterm project/ID_S1_EX2-zoom-seq3-izq.png)
+![Bird of view pointcloud sequence 3](./img/midterm project/ID_S1_EX2-seq3.png)
+![Back image pointcloud sequence 3](./img/midterm project/ID_S1_EX2-zoom-seq3-back.png)
+![Front image pointcloud sequence 3](./img/midterm project/ID_S1_EX2-zoom-seq3-izq.png)
 
 As we can see, we have different cars with different colors those are points taken by the lidar. As we can see, each color represents the depth.
 
@@ -69,19 +69,19 @@ Based on the (x,y)-coordinates in sensor space, you must compute the respective 
 
 Since it is (x, y) coordinates, there is no relieve, what you can differentiate is colors like yellow-orange which indicates the back of the car, also some red dots on the road (blue) which, as we saw earlier are cars.
 
-![](img/midterm project/ID_S2_EX1-2-3-seq1.png)
+![(x, y) image BEV](./img/midterm project/ID_S2_EX1-2-3-seq1.png)
 
 #### Compute intensity layer of the BEV map (ID_S2_EX2)
 On the other hand, seeing the intensity from a bev, we can nearly see nothing, but if we focus we can see the back of some cars.
 
-![](img/midterm project/ID_S2_EX1-2-3-seq1-intensity.png)
+![Intensity bev](./img/midterm project/ID_S2_EX1-2-3-seq1-intensity.png)
 
 #### Compute height layer of the BEV map (ID_S2_EX3)
 Using the height instead of the intensity, we can get better values from bev image.
 
 We can see there are better lines with much more light where we can differentiate the back of the cars that are at front much better than with lidar and the intensity.
 
-![](img/midterm project/ID_S2_EX1-2-3-seq1-height.png)
+![Height BEV](./img/midterm project/ID_S2_EX1-2-3-seq1-height.png)
 
 So we can say that for bev view it is better to use the height since it gives you much more detail on what is going on around you.
 
@@ -99,11 +99,11 @@ The objects that can be detected Cars, Pedestrians, Cyclists, but we'll perform 
 ### Extract 3D bounding boxes from model response (ID_S3_EX2)
 - Frame 50
 
-![](img/midterm project/ID_S3_EX1-2-seq1-labels-vs-detectionspng-frame50.png)
+![Frame 50](./img/midterm project/ID_S3_EX1-2-seq1-labels-vs-detectionspng-frame50.png)
 
 - Frame 51
 
-![](img/midterm project/ID_S3_EX1-2-seq1-labels-vs-detectionspng-frame51.png)
+![Frame 51](./img/midterm project/ID_S3_EX1-2-seq1-labels-vs-detectionspng-frame51.png)
 
 ## Performance Evaluation for Object Detection
 ### Compute intersection-over-union between labels and detections (ID_S4_EX1)
@@ -118,7 +118,7 @@ In this case if the **iou** is `> 0.5` it is a good prediction.
 
 Doing the other two tasks, we get (for frames 50 and 51):
 
-![](img/midterm project/ID_S4_EX1-2-seq1.png)
+![Statistics frames 50 and 51](./img/midterm project/ID_S4_EX1-2-seq1.png)
 
 We have a very good precision since we get ``1.0`` as well as recall.
 We can see that the ``mean`` position error over Z is huge compared with X and Y. But this is normal, since the Z is the height, so there maybe some vehicles with a huge box compared to the box that the vehicle should have had.
