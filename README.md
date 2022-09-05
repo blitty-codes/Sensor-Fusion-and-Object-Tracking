@@ -128,6 +128,8 @@ Parts of this project are based on the following repositories:
 - [Super Fast and Accurate 3D Object Detection based on 3D LiDAR Point Clouds](https://github.com/maudzung/SFA3D)
 - [Complex-YOLO: Real-time 3D Object Detection on Point Clouds](https://github.com/maudzung/Complex-YOLOv4-Pytorch)
 
+## Writeup Midterm project
+[Writeup Midterm Project](./writup-midproject.md)
 
 ## License
 [License](LICENSE.md)
