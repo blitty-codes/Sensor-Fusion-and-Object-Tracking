@@ -20,6 +20,7 @@ import torch
 # add project directory to python path to enable relative imports
 import os
 import sys
+
 PACKAGE_PARENT = '..'
 SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
 sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
@@ -31,17 +32,16 @@ from tools.waymo_reader.simple_waymo_open_dataset_reader import dataset_pb2, lab
 # object detection tools and helper functions
 import misc.objdet_tools as tools
 
-
 # visualize lidar point-cloud
 stop = False
+
 
 def callback(vis):
     vis.close()
 
 
 def show_pcl(pcl):
-
-    ####### ID_S1_EX2 START #######     
+    ####### ID_S1_EX2 START #######
     #######
     print("student task ID_S1_EX2")
 
@@ -64,18 +64,17 @@ def show_pcl(pcl):
 
     #######
     ####### ID_S1_EX2 END #######     
-       
+
 
 # visualize range image
 def show_range_image(frame, lidar_name):
-
-    ####### ID_S1_EX1 START #######     
+    ####### ID_S1_EX1 START #######
     #######
     print("student task ID_S1_EX1")
 
     # step 1 : extract lidar data and range image for the roof-mounted lidar
     lidar = [obj for obj in frame.lasers if obj.name == lidar_name][0]
-    
+
     # step 2 : extract the range and the intensity channel from the range image
     ri = []
     if len(lidar.ri_return1.range_image_compressed) > 0:
@@ -93,7 +92,8 @@ def show_range_image(frame, lidar_name):
 
     # step 5 : map the intensity channel onto an 8-bit scale and normalize with the difference between the 1- and 99-percentile to mitigate the influence of outliers
     ri_intensity = ri[:, :, 1]
-    ri_intensity = (ri_intensity * 255 / (np.percentile(ri_intensity, 99) - np.percentile(ri_intensity, 1))).astype(np.uint8)
+    ri_intensity = (ri_intensity * 255 / (np.percentile(ri_intensity, 99) - np.percentile(ri_intensity, 1))).astype(
+        np.uint8)
 
     # 45 deg
     deg45 = int(ri_range.shape[1] / 8)
@@ -107,21 +107,20 @@ def show_range_image(frame, lidar_name):
 
     #######
     ####### ID_S1_EX1 END #######     
-    
+
     return img_range_intensity
 
 
 # create birds-eye view of lidar data
 def bev_from_pcl(lidar_pcl, configs, vis=True):
-
     # remove lidar points outside detection area and with too low reflectivity
     mask = np.where((lidar_pcl[:, 0] >= configs.lim_x[0]) & (lidar_pcl[:, 0] <= configs.lim_x[1]) &
                     (lidar_pcl[:, 1] >= configs.lim_y[0]) & (lidar_pcl[:, 1] <= configs.lim_y[1]) &
                     (lidar_pcl[:, 2] >= configs.lim_z[0]) & (lidar_pcl[:, 2] <= configs.lim_z[1]))
     lidar_pcl = lidar_pcl[mask]
-    
+
     # shift level of ground plane to avoid flipping from 0 to 255 for neighboring pixels
-    lidar_pcl[:, 2] = lidar_pcl[:, 2] - configs.lim_z[0]  
+    lidar_pcl[:, 2] = lidar_pcl[:, 2] - configs.lim_z[0]
 
     # convert sensor coordinates to bev-map coordinates (center is bottom-middle)
     ####### ID_S2_EX1 START #######     
@@ -141,11 +140,10 @@ def bev_from_pcl(lidar_pcl, configs, vis=True):
 
     # step 4 : visualize point-cloud using the function show_pcl from a previous task
     show_pcl(lidar_pcl_cp)
-    
+
     #######
     ####### ID_S2_EX1 END #######     
-    
-    
+
     # Compute intensity layer of the BEV map
     ####### ID_S2_EX2 START #######     
     #######
@@ -170,7 +168,8 @@ def bev_from_pcl(lidar_pcl, configs, vis=True):
     lidar_pcl_top[lidar_pcl_top[:, 3] > 1.0, 3] = 1.0
     lidar_pcl_top[lidar_pcl_top[:, 3] < 0.0, 3] = 0.0
 
-    intensity_map[np.int_(lidar_pcl_top[:, 0]), np.int_(lidar_pcl_top[:, 1])] = lidar_pcl_top[:, 3] / (np.amax(lidar_pcl_top[:, 3])-np.amin(lidar_pcl_top[:, 3]))
+    intensity_map[np.int_(lidar_pcl_top[:, 0]), np.int_(lidar_pcl_top[:, 1])] = lidar_pcl_top[:, 3] / (
+                np.amax(lidar_pcl_top[:, 3]) - np.amin(lidar_pcl_top[:, 3]))
 
     ## step 5 : temporarily visualize the intensity map using OpenCV to make sure that vehicles separate well from the background
     if vis:
@@ -183,7 +182,6 @@ def bev_from_pcl(lidar_pcl, configs, vis=True):
     #######
     ####### ID_S2_EX2 END ####### 
 
-
     # Compute height layer of the BEV map
     ####### ID_S2_EX3 START #######     
     #######
@@ -195,7 +193,8 @@ def bev_from_pcl(lidar_pcl, configs, vis=True):
     ## step 2 : assign the height value of each unique entry in lidar_top_pcl to the height map 
     ##          make sure that each entry is normalized on the difference between the upper and lower height defined in the config file
     ##          use the lidar_pcl_top data structure from the previous task to access the pixels of the height_map
-    height_map[np.int_(lidar_pcl_top[:, 0]), np.int_(lidar_pcl_top[:, 1])] = lidar_pcl_top[:, 2] / float(np.abs(configs.lim_z[1] - configs.lim_z[0]))
+    height_map[np.int_(lidar_pcl_top[:, 0]), np.int_(lidar_pcl_top[:, 1])] = lidar_pcl_top[:, 2] / float(
+        np.abs(configs.lim_z[1] - configs.lim_z[0]))
 
     ## step 3 : temporarily visualize the intensity map using OpenCV to make sure that vehicles separate well from the background
     if vis:
@@ -210,9 +209,9 @@ def bev_from_pcl(lidar_pcl, configs, vis=True):
     # Compute density layer of the BEV map
     density_map = np.zeros((configs.bev_height + 1, configs.bev_width + 1))
     _, _, counts = np.unique(lidar_pcl_cp[:, 0:2], axis=0, return_index=True, return_counts=True)
-    normalizedCounts = np.minimum(1.0, np.log(counts + 1) / np.log(64)) 
+    normalizedCounts = np.minimum(1.0, np.log(counts + 1) / np.log(64))
     density_map[np.int_(lidar_pcl_top[:, 0]), np.int_(lidar_pcl_top[:, 1])] = normalizedCounts
-        
+
     # assemble 3-channel bev-map from individual maps
     bev_map = np.zeros((3, configs.bev_height, configs.bev_width))
     bev_map[2, :, :] = density_map[:configs.bev_height, :configs.bev_width]  # r_map
