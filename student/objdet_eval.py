@@ -141,7 +141,7 @@ def compute_performance_stats(det_performance_all):
     precision = true_positives / float(true_positives + false_positives)
 
     ## step 3 : compute recall
-    recall = true_positives / float(false_positives + false_negatives)
+    recall = true_positives / float(true_positives + false_negatives)
 
     #######
     ####### ID_S4_EX3 END #######     
@@ -194,4 +194,3 @@ def compute_performance_stats(det_performance_all):
                     verticalalignment='top', bbox=props)
     plt.tight_layout()
     plt.show()
-
