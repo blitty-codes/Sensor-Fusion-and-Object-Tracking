@@ -101,7 +101,6 @@ class Filter:
 
         x = track.x
         P = track.P
-        z = meas.z
         H = meas.sensor.get_H(x)  # measurement matrix
 
         gamma = self.gamma(track, meas)  # residual

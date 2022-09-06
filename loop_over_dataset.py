@@ -48,7 +48,7 @@ import misc.params as params
 
 ##################
 ## Set parameters and perform initializations
-exercise = 'step2-trackmanagement'
+exercise = 'step3-association'
 
 data_filename = ''
 show_only_frames = [0, 0]
@@ -90,7 +90,12 @@ if exercise == 'ID_S4_EX3':
 configs_det = det.load_configs(model_name=model)  # options are 'darknet', 'fpn_resnet'
 
 ### Final project
-if exercise == 'step1-filter' or exercise == 'step2-trackmanagement':
+final_project_steps = [
+    'step1-filter',
+    'step2-trackmanagement',
+    'step3-association'
+]
+if exercise in final_project_steps:
     model = 'fpn_resnet'
     data_filename = 'training_segment-10072231702153043603_5725_000_5745_000_with_camera_labels.tfrecord'
     show_only_frames = [150, 200]
@@ -98,9 +103,14 @@ if exercise == 'step1-filter' or exercise == 'step2-trackmanagement':
     configs_det = det.load_configs(model_name=model)  # options are 'darknet', 'fpn_resnet'
     configs_det.lim_y = [-5, 10]
 
-    if exercise == 'step2-trackmanagement':
+    if exercise == final_project_steps[1]:
         show_only_frames = [65, 100]
         configs_det.lim_y = [-5, 15]
+
+    if exercise == final_project_steps[2]:
+        data_filename = 'training_segment-1005081002024129653_5313_150_5333_150_with_camera_labels.tfrecord'
+        show_only_frames = [0, 200]
+        configs_det.lim_y = [-25, 25]
 
 
 
