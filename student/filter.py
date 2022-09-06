@@ -27,9 +27,9 @@ class Filter:
     '''Kalman filter class'''
 
     def __init__(self):
-        q = params.q
-        dt = params.dt
-        dim_state = params.dim_state
+        self.q = params.q
+        self.dt = params.dt
+        self.dim_state = params.dim_state
 
 
     # System state matrix
