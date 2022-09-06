@@ -48,7 +48,7 @@ import misc.params as params
 
 ##################
 ## Set parameters and perform initializations
-exercise = 'ID_S4_EX3'
+exercise = 'step1-filter'
 
 data_filename = ''
 show_only_frames = [0, 0]
@@ -87,6 +87,17 @@ if exercise == 'ID_S4_EX3':
                                                                    [],\
                                                                    ['show_detection_performance']
 
+configs_det = det.load_configs(model_name=model)  # options are 'darknet', 'fpn_resnet'
+
+### Final project
+if exercise == 'step1-filter':
+    model = 'fpn_resnet'
+    data_filename = 'training_segment-10072231702153043603_5725_000_5745_000_with_camera_labels.tfrecord'
+    show_only_frames = [150, 200]
+    exec_detection, exec_data, exec_tracking, exec_visualization = [], [], ['perform_tracking'], ['show_tracks']
+    configs_det = det.load_configs(model_name=model)  # options are 'darknet', 'fpn_resnet'
+    configs_det.lim_y = [-5, 10]
+
 ## Select Waymo Open Dataset file and frame numbers
 # data_filename = 'training_segment-1005081002024129653_5313_150_5333_150_with_camera_labels.tfrecord'  # Sequence 1
 # data_filename = 'training_segment-10072231702153043603_5725_000_5745_000_with_camera_labels.tfrecord' # Sequence 2
@@ -100,7 +111,6 @@ datafile = WaymoDataFileReader(data_fullpath)
 datafile_iter = iter(datafile)  # initialize dataset iterator
 
 ## Initialize object detection
-configs_det = det.load_configs(model_name=model)  # options are 'darknet', 'fpn_resnet'
 model_det = det.create_model(configs_det)
 
 configs_det.use_labels_as_objects = False  # True = use groundtruth labels as objects, False = use model-based detection
