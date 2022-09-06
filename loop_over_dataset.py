@@ -48,7 +48,7 @@ import misc.params as params
 
 ##################
 ## Set parameters and perform initializations
-exercise = 'step1-filter'
+exercise = 'step2-trackmanagement'
 
 data_filename = ''
 show_only_frames = [0, 0]
@@ -90,13 +90,19 @@ if exercise == 'ID_S4_EX3':
 configs_det = det.load_configs(model_name=model)  # options are 'darknet', 'fpn_resnet'
 
 ### Final project
-if exercise == 'step1-filter':
+if exercise == 'step1-filter' or exercise == 'step2-trackmanagement':
     model = 'fpn_resnet'
     data_filename = 'training_segment-10072231702153043603_5725_000_5745_000_with_camera_labels.tfrecord'
     show_only_frames = [150, 200]
     exec_detection, exec_data, exec_tracking, exec_visualization = [], [], ['perform_tracking'], ['show_tracks']
     configs_det = det.load_configs(model_name=model)  # options are 'darknet', 'fpn_resnet'
     configs_det.lim_y = [-5, 10]
+
+    if exercise == 'step2-trackmanagement':
+        show_only_frames = [65, 100]
+        configs_det.lim_y = [-5, 15]
+
+
 
 ## Select Waymo Open Dataset file and frame numbers
 # data_filename = 'training_segment-1005081002024129653_5313_150_5333_150_with_camera_labels.tfrecord'  # Sequence 1
