@@ -79,7 +79,7 @@ class Association:
                 
     def get_closest_track_and_meas(self):
         ############
-        # TODO Step 3: find closest track and measurement:
+        # Step 3: find closest track and measurement:
         # - find minimum entry in association matrix
         # - delete row and column
         # - remove corresponding track and measurement from unassigned_tracks and unassigned_meas

@@ -48,7 +48,7 @@ import misc.params as params
 
 ##################
 ## Set parameters and perform initializations
-exercise = 'step4-measurements' # 'step3-association' # 'step4-measurements'
+exercise = 'step4-measurements'
 
 data_filename = ''
 show_only_frames = [0, 0]
@@ -96,6 +96,7 @@ final_project_steps = [
     'step3-association',
     'step4-measurements'
 ]
+movie = False
 if exercise in final_project_steps:
     model = 'fpn_resnet'
     data_filename = 'training_segment-10072231702153043603_5725_000_5745_000_with_camera_labels.tfrecord'
@@ -109,11 +110,12 @@ if exercise in final_project_steps:
         configs_det.lim_y = [-5, 15]
 
     if exercise == final_project_steps[2] or exercise == final_project_steps[3]:
-        print(f'@ {exercise}')
         data_filename = 'training_segment-1005081002024129653_5313_150_5333_150_with_camera_labels.tfrecord'
         show_only_frames = [0, 200]
         configs_det.lim_y = [-25, 25]
 
+    if movie:
+        exec_visualization.append('make_tracking_movie')
 
 ## Select Waymo Open Dataset file and frame numbers
 # data_filename = 'training_segment-1005081002024129653_5313_150_5333_150_with_camera_labels.tfrecord'  # Sequence 1

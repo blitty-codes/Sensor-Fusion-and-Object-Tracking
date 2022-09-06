@@ -176,7 +176,7 @@ class Measurement:
         elif sensor.name == 'camera':
 
             ############
-            # TODO Step 4: initialize camera measurement including z and R 
+            # Step 4: initialize camera measurement including z and R
             ############
 
             sigma_camera_x = params.sigma_cam_i  # load params
