@@ -48,7 +48,7 @@ import misc.params as params
 
 ##################
 ## Set parameters and perform initializations
-exercise = 'step3-association'
+exercise = 'step4-measurements' # 'step3-association' # 'step4-measurements'
 
 data_filename = ''
 show_only_frames = [0, 0]
@@ -93,7 +93,8 @@ configs_det = det.load_configs(model_name=model)  # options are 'darknet', 'fpn_
 final_project_steps = [
     'step1-filter',
     'step2-trackmanagement',
-    'step3-association'
+    'step3-association',
+    'step4-measurements'
 ]
 if exercise in final_project_steps:
     model = 'fpn_resnet'
@@ -107,11 +108,11 @@ if exercise in final_project_steps:
         show_only_frames = [65, 100]
         configs_det.lim_y = [-5, 15]
 
-    if exercise == final_project_steps[2]:
+    if exercise == final_project_steps[2] or exercise == final_project_steps[3]:
+        print(f'@ {exercise}')
         data_filename = 'training_segment-1005081002024129653_5313_150_5333_150_with_camera_labels.tfrecord'
         show_only_frames = [0, 200]
         configs_det.lim_y = [-25, 25]
-
 
 
 ## Select Waymo Open Dataset file and frame numbers

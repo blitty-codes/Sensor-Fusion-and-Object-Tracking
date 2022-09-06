@@ -146,7 +146,7 @@ class Filter:
         P = track.P
         R = meas.R
 
-        return H * P * H.transpose() + R
+        return (H * P * H.transpose()) + R
 
         ############
         # END student code
