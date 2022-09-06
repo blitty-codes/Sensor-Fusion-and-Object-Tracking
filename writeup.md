@@ -64,3 +64,16 @@ We can see challenges like a cars coming from behind, cars going on the other di
 - Having width, height and length to the Kalman Filter.
 
 In general there can be a lot of upgrades that are not seen in the code. Optimizing.
+
+# Some tests
+This is the normal using the parameters that are given by the course:
+![Normal video](./img/Final%20project/videos/object-tracking-course.7z)
+
+Change on **q** which is the noise variable for hte Kalman Filter.
+Here the **q** was set to 10, which increases the noise variable. But as we can see compared to the "normal" one, there are much accurate non-tentative noisy bboxes.
+
+![high q video](./img/Final%20project/videos/my_tracking_results-high-q.7z)
+
+On the other hand, we increase the RMSE of each track.
+
+![high q RMSE](img/Final project/RMSE-higher-q.png)

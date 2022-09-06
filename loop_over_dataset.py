@@ -96,7 +96,7 @@ final_project_steps = [
     'step3-association',
     'step4-measurements'
 ]
-movie = False
+movie = True
 if exercise in final_project_steps:
     model = 'fpn_resnet'
     data_filename = 'training_segment-10072231702153043603_5725_000_5745_000_with_camera_labels.tfrecord'
